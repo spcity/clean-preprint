@@ -1,61 +1,46 @@
 # clean-preprint
 
+[![License](https://img.shields.io/badge/license-CC0%201.0-blue?style=flat-square)](LICENSE) [![Compiler](https://img.shields.io/badge/compiler-pdfLaTeX-orange?style=flat-square)](00README.json) [![TeX Live](https://img.shields.io/badge/TeX%20Live-2025-8A2BE2?style=flat-square)](#requirements) [![arXiv ready](https://img.shields.io/badge/arXiv-ready-brightgreen?style=flat-square)](arxiv_submission.zip) [![Line numbers](https://img.shields.io/badge/line%20numbers-on-success?style=flat-square)](#quick-start) [![Version](https://img.shields.io/badge/version-1.0.0-informational?style=flat-square)](#publishing-to-github)
+
 **A brand-free, screen-readable LaTeX preprint class that uploads to arXiv as-is.**
 
-[中文文档](README.zh-CN.md) · [License: CC0-1.0](LICENSE) · [arXiv-ready zip](arxiv_submission.zip)
+[English](README.md) · [中文](README.zh-CN.md) · [Download the arXiv-ready zip](arxiv_submission.zip)
 
-Single-column A4, XCharter with matching math fonts, a 21 pt left-aligned title,
-a full-width bold abstract, generous leading and a thin running head. No logos,
-no copyright lines, no journal metadata. Line numbers are on by default.
+> Single-column A4 · XCharter with matching math fonts · 21 pt left-aligned title · full-width bold abstract · hairline running head · no logos, no copyright lines, no venue-specific metadata.
 
-## Why this exists
+## At a glance
 
-Publisher classes such as Springer Nature's `sn-jnl` are built for production
-pipelines, not for reading. Report-style preprints (for example Google
-DeepMind technical reports) are much easier to read, but come with
-institutional branding. `cleanpreprint.cls` keeps only the typography and
-drops the branding.
+| | |
+|---|---|
+| **Layout** | A4, single column, 2.2 cm side margins, 11 pt body |
+| **Typography** | XCharter + matching math fonts, 21 pt left-aligned title, 10 pt bold abstract |
+| **Header** | hairline rule, short running title, page numbers |
+| **Branding** | none by default; one line adds your own logo |
+| **Review** | line numbers on by default; drop `lineno` to switch off |
+| **Build** | one `pdflatex` pass when `main.bbl` is present |
+| **License** | CC0 1.0 Universal, public domain |
 
-## Highlights
+## Design goals
 
-- **arXiv-ready.** `main.bbl` ships with the source, so arXiv's `pdflatex`
-  needs no BibTeX pass. `00README.json` pins pdfLaTeX and TeX Live 2025.
-- **Nature Portfolio initial submission.** Both *Nature Methods* and *Nature
-  Computational Science* state: "Your initial submission does not need to be
-  specially formatted ... if you are using TeX/LaTeX, please submit compiled
-  PDFs." The PDF from this class is directly usable, with line numbers already on.
-- **One-line branding for any team.** `\preprintlogo{logo.png}` and
-  `\preprintnote{...}` in the preamble. No class-file editing, no forking.
-- **References, your way.** Paste BibTeX entries into `refs.bib`, or paste
-  `main.bbl` into the manuscript for a single-file submission.
-- **Zero friction.** No `\input` chains, no required figure assets, no fonts
-  to install on Overleaf, no institutional assets or trademark issues.
-- **CC0 public domain.** Fork, rebrand and redistribute without attribution.
+- **Readable first.** Generous leading, a wide measure and a clear type hierarchy make long PDFs comfortable on screen.
+- **Brand-free by default.** No institutional assets, no copyright footer, no trademark concerns.
+- **No build friction.** No `\input` chains, no required figure files, no fonts to install on Overleaf.
+- **Yours to rebrand.** All customization lives in `main.tex`; the class file stays untouched.
+- **Free to reuse.** Fork and redistribute without attribution.
 
 ## Quick start
 
-**Overleaf (easiest).** Upload this folder, set Compiler = pdfLaTeX and
-TeX Live version = 2025, then compile `main.tex`.
-
-**Local.**
-```bash
-pdflatex main
-bibtex main          # only needed after editing refs.bib
-pdflatex main
-pdflatex main
-```
-
-**arXiv.** Submit `arxiv_submission.zip` as-is. Its `00README.json` declares
-`main.tex` as toplevel and pdfLaTeX as compiler; arXiv adds its own ID stamp.
+| Where | What to do |
+|---|---|
+| Overleaf | Upload this folder, set Compiler = pdfLaTeX, TeX Live = 2025, compile `main.tex` |
+| Local | `pdflatex main` → `bibtex main` (only after editing `refs.bib`) → `pdflatex main` ×2 |
+| arXiv | Submit `arxiv_submission.zip` as-is; `00README.json` declares the toplevel and compiler |
 
 > The shipped `main.bbl` **must match the name of your main `.tex` file**:
-> LaTeX's `\bibliography{refs}` reads `\jobname.bbl`, not `refs.bbl`.
-> Rename `main.tex` to `paper.tex` and you must also rename the file to
-> `paper.bbl`.
+> `\bibliography{refs}` reads `\jobname.bbl`, not `refs.bbl`.
+> Rename `main.tex` to `paper.tex` and the bibliography file must become `paper.bbl`.
 
 ## Add your team's branding
-
-Everything lives in `main.tex`; the class stays untouched:
 
 ```latex
 \documentclass[11pt,a4paper,lineno]{cleanpreprint}
@@ -65,47 +50,15 @@ Everything lives in `main.tex`; the class stays untouched:
 \runningtitle{Short title}                 % running head, pages 2+
 ```
 
-Without `\preprintlogo` the header reads "Preprint"; without `\preprintnote`
-it shows the date. To change fonts, margins, title size or the header rule,
-edit the clearly marked sections of `cleanpreprint.cls`. Drop the `lineno`
-class option to switch line numbers off.
+Without `\preprintlogo` the header reads "Preprint"; without `\preprintnote` it shows the date. Fonts, margins, title size and the header rule are grouped in clearly marked sections of `cleanpreprint.cls`.
 
 ## References: three workflows
 
 | Mode | What you do | Build |
 |---|---|---|
 | BibTeX (default) | paste entries into `refs.bib` | `pdflatex → bibtex → pdflatex ×2` |
-| arXiv / no BibTeX | keep the shipped `main.bbl` beside `main.tex` | one `pdflatex` |
+| No BibTeX | keep the shipped `main.bbl` beside `main.tex` | one `pdflatex` |
 | Single `.tex` | comment out `\bibliographystyle` and `\bibliography`, paste `main.bbl` contents (or `\input{main.bbl}`) | one `pdflatex` |
-
-The last mode is also what *Nature Methods* asks for after Acceptance in
-Principle: a standard class, one `.tex`, Computer Modern, numerical citations
-and the `.bbl` inlined. See below.
-
-## Switching to a publisher class later
-
-Initial submission needs no change. After Acceptance in Principle, Nature
-Methods requires Word or a standard LaTeX class (`article`, `revtex`,
-`amsart`), a single `.tex`, default Computer Modern, no personal macros,
-numerical references and the `.bbl` pasted into the manuscript. Copy the body
-over and replace the preamble with:
-
-```latex
-\documentclass[11pt]{article}
-\usepackage{amsmath,amssymb,graphicx}
-\usepackage[numbers,sort&compress]{natbib}
-\title{...}\author{...}\date{}
-\begin{document}
-\maketitle
-\begin{abstract}...\end{abstract}
-% ... body unchanged ...
-% ... pasted main.bbl here ...
-\end{document}
-```
-
-The official wording asks for a standard class, while Springer Nature's own
-template uses `sn-jnl.cls`; follow the editor's instructions if Springer
-source files are requested.
 
 ## Files
 
@@ -113,22 +66,18 @@ source files are requested.
 |---|---|
 | `cleanpreprint.cls` | the class (CC0) |
 | `main.tex` | editable manuscript / example |
-| `refs.bib`, `main.bbl` | BibTeX database + prebuilt bibliography for arXiv |
+| `refs.bib` | BibTeX database |
+| `main.bbl` | prebuilt bibliography, so a single `pdflatex` pass works |
 | `00README.json` | arXiv toplevel + compiler declaration |
 | `arxiv_submission.zip` | ready-to-upload bundle |
-| `README.md`, `README.zh-CN.md` | English / 中文 documentation |
-| `LICENSE` | CC0 1.0 Universal |
+| `README.md`, `README.zh-CN.md` | documentation |
+| `LICENSE`, `.gitignore` | CC0 text and ignore rules |
 
 ## Requirements
 
-pdfLaTeX with a full TeX Live 2025 (or Overleaf). Packages used:
-`extarticle` (extsizes), `XCharter`, `newtxmath`, `zlmtt`, `microtype`,
-`geometry`, `graphicx`, `xcolor`, `amsmath`, `amssymb`, `booktabs`, `authblk`,
-`fancyhdr`, `natbib`, `hyperref`, and optionally `lineno`. All ship with TeX Live.
+pdfLaTeX with a full TeX Live 2025 (or Overleaf). Packages used: `extarticle`, `XCharter`, `newtxmath`, `zlmtt`, `microtype`, `geometry`, `graphicx`, `xcolor`, `amsmath`, `amssymb`, `booktabs`, `authblk`, `fancyhdr`, `natbib`, `hyperref`, and optionally `lineno`.
 
-Package order matters: **natbib → hyperref → lineno**. Loading `lineno`
-before `hyperref` inserts spurious blank lines before equations and breaks
-line-number anchors.
+Package order matters: **natbib → hyperref → lineno**. Loading `lineno` before `hyperref` inserts spurious blank lines before equations and breaks line-number anchors.
 
 ## Publishing to GitHub
 
@@ -141,13 +90,8 @@ line-number anchors.
 | Default branch | `main` |
 | Release | `v1.0.0`, attach `arxiv_submission.zip` |
 
-`.gitignore` excludes LaTeX build artefacts but keeps `main.bbl`, which arXiv
-needs. Check the repository name for collisions before creating the repo.
+`.gitignore` excludes build artefacts but keeps `main.bbl`. Check the repository name for collisions before creating the repo.
 
-## Credits and license
+## License
 
-Inspired by the typography of Google DeepMind technical-report preprints
-(arXiv:2512.08296) and by the CTAN `extsizes` classes. This class was written
-from scratch; it contains no Google code, logos or other assets.
-
-**CC0 1.0 Universal** — public domain. See [LICENSE](LICENSE).
+**CC0 1.0 Universal** — public domain, no attribution required. See [LICENSE](LICENSE).

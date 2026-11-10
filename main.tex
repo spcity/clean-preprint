@@ -3,7 +3,7 @@
 % Build: pdflatex -> bibtex -> pdflatex -> pdflatex
 %        (arXiv upload needs no bibtex: main.bbl is inside the zip)
 % Upload: arxiv_submission.zip  (00README.json -> pdfLaTeX / TL2025)
-% Nature initial submission: this PDF itself is acceptable.
+% Line numbers are on by default; drop "lineno" to turn them off.
 % Add references by pasting BibTeX entries into refs.bib; see file end.
 % ============================================================
 \documentclass[11pt,a4paper,lineno]{cleanpreprint}
@@ -33,8 +33,8 @@ This template keeps only the typography that makes report-style preprints
 easy to read on screen: a single A4 column with 2.2\,cm side margins,
 XCharter text with matching newtxmath, a large left-aligned title, a compact
 author block, and a full-width bold abstract. There is no logo, no copyright
-line and no journal-specific metadata. Swap the document class back to
-\texttt{article} or \texttt{sn-jnl} when a publisher requires its own style.
+line and no venue-specific metadata. Everything is defined in one editable
+class file, so the body text stays portable.
 \end{abstract}
 
 \section{Introduction}
@@ -55,7 +55,7 @@ Replace this with your own content.
 %   directly and needs no BibTeX pass.
 \bibliography{refs}
 
-% MODE B (everything in one .tex, e.g. Nature AIP final submission):
+% MODE B (everything in one .tex file):
 %   comment out the line above AND \bibliographystyle{unsrtnat} in the
 %   preamble, then paste the contents of main.bbl here -- or simply
 %   uncomment the next line and keep main.bbl in the folder:
