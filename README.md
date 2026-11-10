@@ -79,19 +79,6 @@ pdfLaTeX with a full TeX Live 2025 (or Overleaf). Packages used: `extarticle`, `
 
 Package order matters: **natbib → hyperref → lineno**. Loading `lineno` before `hyperref` inserts spurious blank lines before equations and breaks line-number anchors.
 
-## Publishing to GitHub
-
-| Field | Suggested value |
-|---|---|
-| Repository name | `clean-preprint` |
-| Description | `Brand-free, readable LaTeX preprint class: arXiv-ready in one pass, line numbers on, one-line logo hooks. CC0.` |
-| Topics | `latex` `latex-template` `arxiv` `preprint` `academic-writing` `typography` `overleaf` `open-science` `cc0` |
-| License | CC0-1.0 (GitHub auto-detects `LICENSE`) |
-| Default branch | `main` |
-| Release | `v1.0.0`, attach `arxiv_submission.zip` |
-
-`.gitignore` excludes build artefacts but keeps `main.bbl`. Check the repository name for collisions before creating the repo.
-
 ## License
 
 **CC0 1.0 Universal** — public domain, no attribution required. See [LICENSE](LICENSE).
