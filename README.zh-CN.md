@@ -83,19 +83,6 @@ pdfLaTeX + 完整 TeX Live 2025（或 Overleaf）。用到的包：`extarticle`�
 **包顺序有讲究**：`natbib → hyperref → lineno`。若 `lineno` 在 `hyperref`
 之前加载，公式前会莫名多出空行，行号锚点也会失效。
 
-## 上传到 GitHub 的配置
-
-| 字段 | 建议值 |
-|---|---|
-| 仓库名 | `clean-preprint` |
-| Description | `Brand-free, readable LaTeX preprint class: arXiv-ready in one pass, line numbers on, one-line logo hooks. CC0.` |
-| Topics | `latex` `latex-template` `arxiv` `preprint` `academic-writing` `typography` `overleaf` `open-science` `cc0` |
-| License | CC0-1.0（放好 `LICENSE`，GitHub 会自动识别） |
-| 默认分支 | `main` |
-| Release | `v1.0.0`，附件挂 `arxiv_submission.zip` |
-
-`.gitignore` 会忽略编译产物，但显式保留 `main.bbl`。建仓库前建议先搜一下同名项目。
-
 ## 许可证
 
 **CC0 1.0 Universal** —— 公有领域，无需署名。详见 [LICENSE](LICENSE)。
